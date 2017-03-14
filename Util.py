@@ -42,11 +42,17 @@ def cost2(T, Y):
 	return -np.log(Y[np.arrange(N), T]).sum()
 
 
+def predict(P_Y_given_X):
+	return np.argmax(P_Y_given_X, axis=1)
+
+
 def error_rate(targets, predictions):
 	return np.mean(targets != predictions)
 
+
 def classification_rate(Y, P):
 	return np.mean(Y == P)
+
 
 def y2indicator(y):
 	N = len(y)
@@ -110,4 +116,3 @@ def getBinaryData():
 				Y.append(y)
 				X.append([int(p) for p in row[1].split()])
 	return np.array(X) / 255.0, np.array(Y)
-0

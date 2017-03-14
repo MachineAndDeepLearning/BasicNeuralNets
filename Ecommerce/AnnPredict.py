@@ -1,6 +1,8 @@
 import numpy as np
-from ProccessData import get_data
+
+from Ecommerce.ProccessData import get_data
 from Util import softmax, init_weight_and_biases, classification_rate
+
 X, Y = get_data()
 
 M = 5
