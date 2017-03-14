@@ -45,6 +45,8 @@ def cost2(T, Y):
 def error_rate(targets, predictions):
 	return np.mean(targets != predictions)
 
+def classification_rate(Y, P):
+	return np.mean(Y == P)
 
 def y2indicator(y):
 	N = len(y)
