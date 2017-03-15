@@ -39,7 +39,7 @@ def cost2(T, Y):
 	# instead of multiplying by a large indicator matrix with mostly 0s
 
 	N = len(T)
-	return -np.log(Y[np.arrange(N), T]).sum()
+	return -np.log(Y[np.arange(N), T]).sum()
 
 
 def predict(P_Y_given_X):

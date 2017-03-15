@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from Util import getData, softmax, cost, y2indicator, error_rate
 from sklearn.utils import shuffle
 
+
 class LogisticModel(object):
 	def __init__(self):
 		pass
@@ -25,12 +26,12 @@ class LogisticModel(object):
 		best_validation_error = 1
 
 		for i in range(epochs):
-			#forward prop
+			# forward prop
 			pY = self.forward(X)
 
 			# gradient descent
-			self.W -= learning_rate *(X.T.dot(pY - T) + reg*self.W)
-			self.b -= learning_rate*((pY - T).sum(axis=0) + reg *self.b)
+			self.W -= learning_rate * (X.T.dot(pY - T) + reg * self.W)
+			self.b -= learning_rate * ((pY - T).sum(axis=0) + reg * self.b)
 
 			if i % 10 == 0:
 				pYvalid = self.forward(Xvalid)
@@ -56,15 +57,16 @@ class LogisticModel(object):
 
 	def score(self, X, Y):
 		prediction = self.predict(X)
-		return 1- error_rate(Y, prediction)
+		return 1 - error_rate(Y, prediction)
 
 
 def main():
 	X, Y = getData()
 
-	model = LogisticModel
+	model = LogisticModel()
 	model.fit(X, Y, show_fig=True)
 	print(model.score(X, Y))
+
 
 if __name__ == "__main__":
 	main()
