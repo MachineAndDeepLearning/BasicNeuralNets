@@ -72,7 +72,7 @@ def getData(balance_ones=True):
 	Y = []
 	first = True
 
-	for line in open('Data/fer2013/fer2013.csv'):
+	for line in open('../Data/fer2013/fer2013.csv'):
 		if first:
 			first = False
 		else:

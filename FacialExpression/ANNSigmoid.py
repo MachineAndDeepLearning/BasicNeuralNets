@@ -3,11 +3,12 @@ import matplotlib.pyplot as plt
 from sklearn.utils import shuffle
 from Util import getBinaryData, sigmoid, sigmoid_cost, error_rate, relu
 
+
 class ANN(object):
 	def __init__(self, M):
 		self.M = M
 
-	def fit(self, X, Y, learning_rate=5*10e-7, reg=1.0, epochs=10000, show_fig=False, use_tanh=False):
+	def fit(self, X, Y, learning_rate=5 * 10e-7, reg=1.0, epochs=10000, show_fig=False, use_tanh=True):
 		self.use_tanh = use_tanh
 
 		X, Y = shuffle(X, Y)
@@ -30,21 +31,21 @@ class ANN(object):
 			# gradient descent
 			pY_Y = pY - Y
 			self.W2 -= learning_rate * (Z.T.dot(pY_Y) + reg * self.W2)
-			self.b2 -= learning_rate *((pY_Y).sum() + reg*self.b2)
+			self.b2 -= learning_rate * ((pY_Y).sum() + reg * self.b2)
 
 			if self.use_tanh:
-				dZ = np.outer(pY_Y, self.W2)  * (1 - Z*Z)
+				dZ = np.outer(pY_Y, self.W2) * (1 - Z * Z)
 			else:
 				dZ = np.outer(pY_Y, self.W2) * (Z > 0)
-			self.W1 -= learning_rate*(X.T.dot(dZ) + reg*self.W1)
-			self.b1 -= learning_rate*(dZ.sum(axis=0) + reg*self.b1)
+			self.W1 -= learning_rate * (X.T.dot(dZ) + reg * self.W1)
+			self.b1 -= learning_rate * (dZ.sum(axis=0) + reg * self.b1)
 
 			if i % 20 == 0:
 				pYvalid, _ = self.forward(Xvalid)
 				c = sigmoid_cost(Yvalid, pYvalid)
 				costs.append(c)
 				e = error_rate(Yvalid, np.round(pYvalid))
-				print("i:", i,"cost:", c, "error", e)
+				print("i:", i, "cost:", c, "error", e)
 				if e < best_validation_error:
 					best_validation_error = e
 		print("best validation error:", best_validation_error)
@@ -68,17 +69,19 @@ class ANN(object):
 		prediction = self.predict(X)
 		return 1 - error_rate(Y, prediction)
 
+
 def main():
 	X, Y = getBinaryData()
 
-	X0 = X[Y==0, :]
-	X1 = X[Y==1, :]
+	X0 = X[Y == 0, :]
+	X1 = X[Y == 1, :]
 	X1 = np.repeat(X1, 9, axis=0)
 	X = np.vstack([X0, X1])
-	Y = np.array([0]*len(X0) + [1]*len(X1))
+	Y = np.array([0] * len(X0) + [1] * len(X1))
 
 	model = ANN(100)
 	model.fit(X, Y, show_fig=True)
+
 
 if __name__ == "__main__":
 	main()
