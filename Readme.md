@@ -9,3 +9,7 @@ This project implements a variety of simple neural models for the following prob
 It also implements some basic functions for neural nets
 * Forward propagation
 * Backward propagation
+
+
+## Credit
+Based on courses from lazyprogrammer.me on Udemy
